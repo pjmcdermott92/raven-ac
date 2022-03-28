@@ -1,0 +1,46 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font: {
+        family: var(--font-stack);
+        size: var(--fs-base);
+    }
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+}
+
+.section-heading {
+    margin: 0 0 1rem;
+    font: {
+        size: var(--fs-header);
+        weight: 900;
+    }
+    text-shadow: 0 0 4px rgba(0,0,0,0.75);
+
+    @media (max-width: 767px) {
+        text-align: center;
+    }
+}
+
+.section-sub-heading {
+    margin: .75rem 0 .25rem;
+    font-size: var(--fs-title);
+}
+
+.text-large {
+    font-size: var(--fs-md);
+}
