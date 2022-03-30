@@ -12,23 +12,37 @@ const ContactForm = () => {
         setFieldValues({ ...fieldValues, [name]: value });
     }
 
-    const onSubmit = e => {
+    const onSubmit = async e => {
         e.preventDefault();
         setFieldErrors({});
         const errors = {};
-        if (!fieldValues.firstName.length || fieldValues.firstName.length < 2) errors = {
+        const { firstName, lastName, email, phone, message } = fieldValues;
+        if (!firstName.length || firstName.length < 2) errors = {
             ...errors, firstName: 'Please enter your First Name'
         };
-        if (!fieldValues.lastName.length || fieldValues.lastName.length < 2) errors = {
+        if (!lastName.length || lastName.length < 2) errors = {
             ...errors, lastName: 'Please enter your Last Name'
         };
-        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(fieldValues.email)) errors = {
+        if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) errors = {
             ...errors, email: 'Please enter a valid Email Address'
         };
-        if (!fieldValues.message.length || fieldValues.message.length < 1) errors = {
+        if (!message.length || message.length < 1) errors = {
             ...errors, message: 'Please enter your Message'
         };
         if (Object.keys(errors).length) return setFieldErrors(errors);
+        const res = await fetch('/api/send-message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ firstName, lastName, email, message })
+        });
+        const result = await res.json();
+        if (result.success) {
+            setFieldValues(INIT_INPUTS);
+            setMessageSent(true);
+            setFieldErrors({});
+        }
     }
 
     return (
