@@ -19,6 +19,10 @@ export default function Home() {
     <WhyRavenSection />
     <AboutSection />
     <ContactSection />
+    <footer>
+      <p>Copyright - &copy;{ new Date().getFullYear()} Raven Heating &amp; Cooling, LLC. All rights reserved.</p>
+      <p>Website by <a href='http://www.pjmcdermott.com/' target='_blank' rel='noreferrer'>PJMcDermott</a>.</p>
+    </footer>
     </>
   )
 }

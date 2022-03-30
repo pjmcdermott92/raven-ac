@@ -21,6 +21,11 @@
     color: #FFF;
 }
 
+.btn-secondary {
+    background-color: var(--color-blue);
+    color: var(--color-dark);
+}
+
 .btn-outline-light {
     background-color: transparent;
     border: 2px solid #FFF;
