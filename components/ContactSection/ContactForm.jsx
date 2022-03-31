@@ -152,7 +152,6 @@ const ContactForm = () => {
                                 <span className='field-error'>{fieldErrors.message}</span>
                             }
                         </div>
-                        <input type='text' name='_form_id' value={fieldValues._form_id} onChange={e => onChange(e)} style={{display: 'none'}} />
                         <button className='btn btn-secondary' type='submit' disabled={isLoading}>Submit</button>
                         {isLoading && <span>Sending...</span>}
                     </form>
