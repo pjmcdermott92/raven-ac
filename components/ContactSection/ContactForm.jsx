@@ -6,6 +6,7 @@ const INIT_INPUTS = { firstName: '', lastName: '', email: '', phone: '', message
 const ContactForm = () => {
     const [fieldValues, setFieldValues] = useState(INIT_INPUTS);
     const [fieldErrors, setFieldErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const [messageSent, setMessageSent] = useState(false);
 
     const onChange = ({ target: { name, value } }) => {
@@ -14,6 +15,7 @@ const ContactForm = () => {
 
     const onSubmit = async e => {
         e.preventDefault();
+        setIsLoading(true);
         setFieldErrors({});
         const errors = {};
         const { firstName, lastName, email, phone, message } = fieldValues;
@@ -29,7 +31,10 @@ const ContactForm = () => {
         if (!message.length || message.length < 1) errors = {
             ...errors, message: 'Please enter your Message'
         };
-        if (Object.keys(errors).length) return setFieldErrors(errors);
+        if (Object.keys(errors).length) {
+            setFieldErrors(errors);
+            setIsLoading(false);
+        };
         const res = await fetch('/api/send-message', {
             method: 'POST',
             headers: {
@@ -45,6 +50,7 @@ const ContactForm = () => {
             setFieldValues(INIT_INPUTS);
             setMessageSent(true);
             setFieldErrors({});
+            setIsLoading(false);
         }
     }
 
@@ -144,7 +150,8 @@ const ContactForm = () => {
                                 <span className='field-error'>{fieldErrors.message}</span>
                             }
                         </div>
-                        <button className='btn btn-secondary' type='submit'>Submit</button>
+                        <button className='btn btn-secondary' type='submit' disabled={isLoading}>Submit</button>
+                        {isLoading && <span>Sending...</span>}
                     </form>
                     </>
                 )
