@@ -34,7 +34,7 @@ const ContactForm = () => {
         if (Object.keys(errors).length) {
             setFieldErrors(errors);
             setIsLoading(false);
-            return;
+            return null;
         };
 
         const res = await fetch('/api/send-message', {
