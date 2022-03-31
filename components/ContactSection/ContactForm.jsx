@@ -35,9 +35,12 @@ const ContactForm = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ firstName, lastName, email, message })
+            body: JSON.stringify({ firstName, lastName, email, phone, message })
         });
         const result = await res.json();
+        if (!result.success) {
+            console.log(result.message);
+        }
         if (result.success) {
             setFieldValues(INIT_INPUTS);
             setMessageSent(true);

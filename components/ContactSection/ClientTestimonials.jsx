@@ -49,7 +49,7 @@ const ClientTestimonials = () => {
     useEffect(() => {
         const testimonyInterval = setInterval(() => changeSlide(1), 5000);
         return () => clearInterval(testimonyInterval);
-    }, [slideIndex]);
+    });
 
     return (
         <section className={s.testimonialsSection}>
