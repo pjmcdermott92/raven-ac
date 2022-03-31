@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import s from './ContactSection.module.scss';
 
-const INIT_INPUTS = { firstName: '', lastName: '', email: '', phone: '', message: '' };
+const INIT_INPUTS = { firstName: '', lastName: '', email: '', phone: '', message: '', _form_id: '' };
 
 const ContactForm = () => {
     const [fieldValues, setFieldValues] = useState(INIT_INPUTS);
@@ -34,13 +34,15 @@ const ContactForm = () => {
         if (Object.keys(errors).length) {
             setFieldErrors(errors);
             setIsLoading(false);
+            return;
         };
+
         const res = await fetch('/api/send-message', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ firstName, lastName, email, phone, message })
+            body: JSON.stringify({ firstName, lastName, email, phone, message, _form_id })
         });
         const result = await res.json();
         if (!result.success) {
@@ -150,6 +152,7 @@ const ContactForm = () => {
                                 <span className='field-error'>{fieldErrors.message}</span>
                             }
                         </div>
+                        <input type='text' name='_form_id' value={fieldValues._form_id} onChange={e => onChange(e)} style={{display: 'none'}} />
                         <button className='btn btn-secondary' type='submit' disabled={isLoading}>Submit</button>
                         {isLoading && <span>Sending...</span>}
                     </form>

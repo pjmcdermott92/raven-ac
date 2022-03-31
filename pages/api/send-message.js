@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 export default function handler(req, res) {
     if (req.method === 'POST') {
-        const { firstName, lastName, email, phone, message } = req.body;
+        const { firstName, lastName, email, phone, message, _form_id } = req.body;
         let transporter = nodemailer.createTransport({
             service: 'Gmail',
             auth: {
@@ -26,7 +26,6 @@ export default function handler(req, res) {
                 <p><em>Hit 'Reply' to reply to this sender directly.</em></p>
             `
         };
-  
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error(error);
