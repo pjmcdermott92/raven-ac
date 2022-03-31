@@ -34,25 +34,25 @@ const ContactForm = () => {
         if (Object.keys(errors).length) {
             setFieldErrors(errors);
             setIsLoading(false);
-            return null;
-        };
-
-        const res = await fetch('/api/send-message', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ firstName, lastName, email, phone, message, _form_id })
-        });
-        const result = await res.json();
-        if (!result.success) {
-            console.log(result.message);
-        }
-        if (result.success) {
-            setFieldValues(INIT_INPUTS);
-            setMessageSent(true);
-            setFieldErrors({});
-            setIsLoading(false);
+            return;
+        } else {
+            const res = await fetch('/api/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ firstName, lastName, email, phone, message, _form_id })
+            });
+            const result = await res.json();
+            if (!result.success) {
+                console.log(result.message);
+            }
+            if (result.success) {
+                setFieldValues(INIT_INPUTS);
+                setMessageSent(true);
+                setFieldErrors({});
+                setIsLoading(false);
+            }
         }
     }
 
