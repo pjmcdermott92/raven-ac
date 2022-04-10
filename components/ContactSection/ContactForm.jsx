@@ -63,6 +63,7 @@ const ContactForm = () => {
                     <>
                     <h1 className={s.sentText}>Your message has been sent.</h1>
                     <p>We will get back to you as soon as possible.</p>
+                    <p>A copy of your message will be sent to the email address that you provided.</p>
                     </>
                 ) : (
                     <>

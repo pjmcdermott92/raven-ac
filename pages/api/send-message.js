@@ -11,19 +11,17 @@ export default function handler(req, res) {
             }
         });
         let mailOptions = {
-            from: `"Raven AC" <${process.env.FORM_EMAIL_ADDRESS}>`,
-            to: process.env.FORM_EMAIL_ADDRESS,
+            from: `"Raven AC" <${email}>`,
+            to: email,
             replyTo: email,
-            subject: 'New Website Inquiry',
+            subject: 'Raven Heating & Cooling, LLC Inquiry',
             html: `
-                <h1>New Inquiry from Raven Heating & Cooling</h1>
+                <h1>Message to Raven Heating & Cooling</h1>
                 <p><strong>Name:</strong> ${firstName} ${lastName}</p>
                 <p><strong>Email Address:</strong> ${email}</p>
                 <p><strong>Phone Number:</strong> ${phone}</p>
                 <p><strong>Message:</strong></p>
                 <p>${message}</p>
-                <hr />
-                <p><em>Hit 'Reply' to reply to this sender directly.</em></p>
             `
         };
         transporter.sendMail(mailOptions, (error, info) => {
