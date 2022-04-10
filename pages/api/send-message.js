@@ -11,7 +11,7 @@ export default function handler(req, res) {
             }
         });
         let mailOptions = {
-            from: `"Raven AC" <${email}>`,
+            from: `"Raven AC" <${process.env.FORM_EMAIL_ADDRESS}}>`,
             to: email,
             replyTo: email,
             subject: 'Raven Heating & Cooling, LLC Inquiry',
