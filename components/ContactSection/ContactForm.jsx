@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import s from './ContactSection.module.scss';
 
-const INIT_INPUTS = { firstName: '', lastName: '', email: '', phone: '', message: '', _form_id: '' };
+const INIT_INPUTS = { firstName: '', lastName: '', email: '', phone: '', message: '' };
 
 const ContactForm = () => {
     const [fieldValues, setFieldValues] = useState(INIT_INPUTS);
@@ -41,7 +41,7 @@ const ContactForm = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ firstName, lastName, email, phone, message, _form_id })
+                body: JSON.stringify({ firstName, lastName, email, phone, message })
             });
             const result = await res.json();
             if (!result.success) {
