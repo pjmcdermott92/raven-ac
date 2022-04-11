@@ -11,12 +11,12 @@ export default function handler(req, res) {
             }
         });
         let mailOptions = {
-            from: `"Raven AC" <${process.env.FORM_EMAIL_ADDRESS}}>`,
-            to: email,
+            from: `"Raven AC" <${email}>`,
+            to: process.env.FORM_EMAIL_ADDRESS,
             replyTo: email,
-            subject: 'Raven Heating & Cooling, LLC Inquiry',
+            subject: 'New Website Inquiry',
             html: `
-                <h1>Message to Raven Heating & Cooling</h1>
+                <h1>New Inquiry from Raven Heating & Cooling</h1>
                 <p><strong>Name:</strong> ${firstName} ${lastName}</p>
                 <p><strong>Email Address:</strong> ${email}</p>
                 <p><strong>Phone Number:</strong> ${phone}</p>
